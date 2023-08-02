@@ -1,14 +1,16 @@
 {
   "expo": {
-    "name": "futbol-in",
+    "name": "Futbol-In",
     "slug": "futbol-in",
-    "version": "1.0.0",
+    "description": "Aplicación para ubicar futbolines cerca de mi localización",
+    "owner": "Fernando Rodríguez Esteban",
+    "version": "0.0.1",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
     "splash": {
       "image": "./assets/splash.png",
-      "resizeMode": "contain",
+      "resizeMode": "cover",
       "backgroundColor": "#ffffff"
     },
     "assetBundlePatterns": [
@@ -24,7 +26,9 @@
       }
     },
     "web": {
-      "favicon": "./assets/favicon.png"
-    }
+      "favicon": "./assets/favicon.png",
+      "bundler": "metro"
+    },
+    "scheme": "futbol-in"
   }
 }
