@@ -28,6 +28,7 @@
     "react-native-svg": "13.4.0",
     "react-native-svg-transformer": "^1.1.0",
     "react-native-web": "~0.18.10",
+    "tailwindcss-react-native": "^1.7.10",
     "typescript": "^4.9.4"
   },
   "devDependencies": {

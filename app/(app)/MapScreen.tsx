@@ -1,10 +1,16 @@
-import React from "react";
+import React, { useState } from "react";
 import MapView, { Marker } from "react-native-maps";
 
 import { View, Text } from "react-native";
-import { CustomMarker } from "../../components";
+import { CustomMarker, TarjetaFutbolin } from "../../components";
+import { futbolines } from "../../data/Futbolin";
+import { UbicacionFutolinDTO } from "../../models/UbicacionFutolinDTO";
+
 export default function MapScreen() {
   const mapRef = React.useRef()
+
+  const [futbolinSeleccionado, setFutbolinSeleccionado] = useState<UbicacionFutolinDTO | null>(futbolines[0])
+
   const mapStyle = [
     {
       elementType: "geometry",
@@ -208,20 +214,20 @@ export default function MapScreen() {
       nombre: 'Bar NIX'
     },
     {
-      id: 2,
+      id: 4,
       coordinate: {
         latitude: 40.976154,
         longitude: -5.653368
       },
     },
   ]
-
   return (
     <View className={"flex-1 p-2"}>
       <Text className={'text-r'}>
         El mapaasdf
       </Text>
-      <View className={"w-full h-full flex items-center justify-between"}>
+      <View className={"w-full h-full flex items-center"}>
+
         <MapView
           ref={mapRef}
           region={{
@@ -236,21 +242,28 @@ export default function MapScreen() {
             latitudeDelta: 0.02,
             longitudeDelta: 0.02,
           }}
-          style={{ width: 300, height: 500 }}
+          style={{ width: 340, height: 500 }}
           loadingEnabled={true}
           loadingIndicatorColor="#666666"
           loadingBackgroundColor="#222"
           moveOnMarkerPress={false}
-          showsUserLocation={true}
-          // showsCompass={true}
           showsPointsOfInterest={false}
-          // provider="google"
           customMapStyle={mapStyle}
         >
 
-          {markers.map(marker => {
+          {futbolines.map(futbolin => {
+            return (
+              <CustomMarker
+                futbolin={futbolin}
+              />
+
+            )
+          })}
+
+          {/* {markers.map(marker => {
             return (
               <Marker
+                key={marker.id}
                 onPress={() => { console.log('pressed'); }}
                 coordinate={marker.coordinate}
                 centerOffset={{ x: -18, y: -60 }}
@@ -263,29 +276,14 @@ export default function MapScreen() {
 
               </Marker>
             )
-          })}
-
-
-          {/* <Marker
-            onPress={() => { console.log('pressed'); }}
-            coordinate={{
-              latitude: 40.96297,
-              longitude: -5.66158,
-            }}
-            centerOffset={{ x: -42, y: -60 }}
-            anchor={{ x: 0.84, y: 1 }}
-          >
-
-            <View className="p-2 rounded-full h-8 w-8 bg-green-500">
-              <Text>Hola</Text>
-            </View>
-
-          </Marker> */}
-
-
-
+          })} */}
 
         </MapView>
+
+
+        <TarjetaFutbolin
+          futbolin={futbolinSeleccionado}
+        />
       </View>
     </View>
   );
