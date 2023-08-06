@@ -11,10 +11,12 @@ export default function home() {
       <Text className={"text-white mr-auto p-1"}>Según tus favoritos</Text>
       
       <ScrollView
-        hitSlop={30}
+        className={'m-2'}
+        hitSlop={100}
         horizontal= {true}
         snapToInterval={320} //your element width
         decelerationRate={'fast'}
+        
       >
         <View>
           <Text className={'bg-[#333] m-1 p-4 w-80 h-20 text-white rounded-lg'}>Un elemento</Text>

@@ -223,7 +223,7 @@ export default function MapScreen() {
   ]
   return (
     <View className={"flex-1 p-2"}>
-      <Text className={'text-r'}>
+      <Text className={'text-right'}>
         El mapaasdf
       </Text>
       <View className={"w-full h-full flex items-center"}>
@@ -250,11 +250,13 @@ export default function MapScreen() {
           showsPointsOfInterest={false}
           customMapStyle={mapStyle}
         >
-
-          {futbolines.map(futbolin => {
+          {futbolines.map((futbolin, index) => {
             return (
               <CustomMarker
+                key={index}
                 futbolin={futbolin}
+                onpress={(futbolin) => { setFutbolinSeleccionado(futbolin) }}
+                selected={futbolinSeleccionado.id === futbolin.id}
               />
 
             )
