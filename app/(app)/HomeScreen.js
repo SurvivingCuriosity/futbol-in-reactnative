@@ -1,10 +1,15 @@
-import { StatusBar } from "expo-status-bar";
 import { Text, View, Pressable, ScrollView } from "react-native";
-import { ImageViewer, Button } from "../../components";
 import { Link } from "expo-router";
+import { useSelector, useDispatch } from "react-redux";
 
 
 export default function home() {
+
+  const dispatch = useDispatch()
+  const state = useSelector(state => state)
+
+
+
   return (
     <View className={"justify-center items-center"}>
       
