@@ -2,9 +2,9 @@ import React, { useState } from "react";
 import MapView, { Marker } from "react-native-maps";
 
 import { View, Text } from "react-native";
-import { CustomMarker, TarjetaFutbolin } from "../../components";
-import { futbolines } from "../../data/Futbolin";
-import { UbicacionFutolinDTO } from "../../models/UbicacionFutolinDTO";
+import { CustomMarker, TarjetaFutbolin } from "../../src/components";
+import { futbolines } from "../../src/data/Futbolin";
+import { UbicacionFutolinDTO } from "../../src/models/UbicacionFutolinDTO";
 
 export default function MapScreen() {
   const mapRef = React.useRef()

@@ -1,5 +1,5 @@
 import { Slot } from "expo-router";
-import { FixedBottomNav } from "../../components";
+import { FixedBottomNav } from "../../src/components";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function AppLayout() {
