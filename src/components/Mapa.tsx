@@ -10,8 +10,8 @@ const Mapa = () => {
   const dispatch = useDispatch();
 
   const futbolinesSlice = useSelector(state => state.futbolines)
-  
-  const {futbolines, futbolinSeleccionado} = futbolinesSlice
+
+  const { futbolines, futbolinSeleccionado } = futbolinesSlice
 
 
   const mapStyle = [
@@ -195,10 +195,10 @@ const Mapa = () => {
 
 
   useEffect(() => {
-    console.log('USEEFFECT ',futbolines?.futbolinSeleccionado);
-  
+    console.log('USEEFFECT ', futbolines?.futbolinSeleccionado);
+
   }, [futbolines?.futbolinSeleccionado])
-  
+
 
   const [posicionMapa, setPosicionMapa] = useState({
     latitude: 40.971279,
@@ -208,18 +208,18 @@ const Mapa = () => {
   })
 
   const handleClickEnMarcador = (futbolin: UbicacionFutolinDTO) => {
-    console.log('DISPATCHEANDO',futbolin);
-    
+    console.log('DISPATCHEANDO', futbolin);
+
     dispatch(setFutbolinSeleccionado(futbolin))
     // setFutbolinSeleccionado(futbolin)
   }
+
 
   return (
     <>
       <MapView
         ref={mapRef}
         region={posicionMapa}
-
         initialRegion={{
           latitude: 40.972279,
           longitude: -5.663896,
@@ -227,25 +227,24 @@ const Mapa = () => {
           longitudeDelta: 0.02,
         }}
         style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '95%' }}
-        // loadingEnabled={true}
-        loadingIndicatorColor="#666666"
-        loadingBackgroundColor="#222"
         moveOnMarkerPress={false}
         showsPointsOfInterest={false}
         customMapStyle={mapStyle}
+        showsCompass={false}
+        onRegionChangeComplete={(a) => { console.log(a); }}
       >
         {
-        futbolines !== undefined &&
-        futbolines?.map((futbolin, index) => {
-          return (
-            <CustomMarker
-              key={index}
-              futbolin={futbolin}
-              onpress={(futbolin) => { handleClickEnMarcador(futbolin) }}
-              selected={futbolinSeleccionado?.id === futbolin.id}
-            />
-          )
-        })}
+          futbolines !== undefined &&
+          futbolines?.map((futbolin, index) => {
+            return (
+              <CustomMarker
+                key={index}
+                futbolin={futbolin}
+                onpress={(futbolin) => { handleClickEnMarcador(futbolin) }}
+                selected={futbolinSeleccionado?.id === futbolin.id}
+              />
+            )
+          })}
       </MapView>
     </>
   );
