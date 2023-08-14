@@ -21,7 +21,7 @@ export default function Register() {
       }}
     >
       <View className="w-full h-full p-5 flex flex-col justify-start">
-        <Text className={"text-miverde-500 text-5xl font-extrabold my-8"}>
+        <Text className={"text-miverde-400 text-5xl font-extrabold my-8"}>
           Bienvenido!
         </Text>
 

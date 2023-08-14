@@ -27,7 +27,7 @@ export default function Login() {
 
 
       <View className="mb-4">
-          <Text className="text-miverde-300 text-lg">Usuario o email </Text>
+          <Text className="mb-1 text-miverde-300 text-lg">Usuario o email </Text>
           <TextInput
             placeholder="@"
             className="h-10 p-2 bg-white rounded-md text-lg"
@@ -35,7 +35,7 @@ export default function Login() {
       </View>
 
       <View className="mb-4">
-          <Text className="text-miverde-300 text-lg">Contraseña </Text>
+          <Text className="mb-1 text-miverde-300 text-lg">Contraseña </Text>
           <TextInput
             placeholder="•"
             className="h-10 p-2 bg-white rounded-md text-lg"

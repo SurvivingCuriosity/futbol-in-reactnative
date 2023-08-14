@@ -1,18 +1,18 @@
-import React, { useState } from "react";
-import MapView, { Marker } from "react-native-maps";
+import { useState, useRef, useEffect } from 'react'
+import { UbicacionFutolinDTO } from '../models/UbicacionFutolinDTO';
+import { CustomMarker } from './CustomMarker';
+import MapView, { Camera } from 'react-native-maps';
+import { useDispatch, useSelector } from 'react-redux';
+import { setFutbolinSeleccionado } from '../redux/slices/futbolinesSlice';
 
-import { View, Text, TextInput } from "react-native";
-import { CustomMarker, TarjetaFutbolin, Mapa } from "../../src/components";
-import { futbolines } from "../../src/data/Futbolin";
-import { UbicacionFutolinDTO } from "../../src/models/UbicacionFutolinDTO";
-import { useSelector } from "react-redux";
-
-export default function MapScreen() {
-  const mapRef = React.useRef()
+const Mapa = () => {
+  const mapRef = useRef()
+  const dispatch = useDispatch();
 
   const futbolinesSlice = useSelector(state => state.futbolines)
   
   const {futbolines, futbolinSeleccionado} = futbolinesSlice
+
 
   const mapStyle = [
     {
@@ -193,52 +193,62 @@ export default function MapScreen() {
     },
   ];
 
-  const markers = [
-    {
-      id: 1,
-      coordinate: {
-        latitude: 40.96297,
-        longitude: -5.66158
-      },
-    },
-    {
-      id: 2,
-      coordinate: {
-        latitude: 40.96409,
-        longitude: -5.66158
-      },
-    },
-    {
-      id: 3,
-      coordinate: {
-        latitude: 40.967407,
-        longitude: -5.667707
-      },
-      nombre: 'Bar NIX'
-    },
-    {
-      id: 4,
-      coordinate: {
-        latitude: 40.976154,
-        longitude: -5.653368
-      },
-    },
-  ]
+
+  useEffect(() => {
+    console.log('USEEFFECT ',futbolines?.futbolinSeleccionado);
+  
+  }, [futbolines?.futbolinSeleccionado])
+  
+
+  const [posicionMapa, setPosicionMapa] = useState({
+    latitude: 40.971279,
+    longitude: -5.663896,
+    latitudeDelta: 0.02,
+    longitudeDelta: 0.02,
+  })
+
+  const handleClickEnMarcador = (futbolin: UbicacionFutolinDTO) => {
+    console.log('DISPATCHEANDO',futbolin);
+    
+    dispatch(setFutbolinSeleccionado(futbolin))
+    // setFutbolinSeleccionado(futbolin)
+  }
 
   return (
     <>
-      <Mapa />
+      <MapView
+        ref={mapRef}
+        region={posicionMapa}
 
-      <TextInput
-            placeholder="Introduce una ciudad..."
-            className="h-10 p-2 bg-white rounded-md text-lg absolute top-12 w-11/12 ml-4"
-          />
-
-      <View className="absolute bottom-24">
-        <TarjetaFutbolin
-          futbolin={futbolinSeleccionado}
-        />
-      </View>
+        initialRegion={{
+          latitude: 40.972279,
+          longitude: -5.663896,
+          latitudeDelta: 0.02,
+          longitudeDelta: 0.02,
+        }}
+        style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '95%' }}
+        // loadingEnabled={true}
+        loadingIndicatorColor="#666666"
+        loadingBackgroundColor="#222"
+        moveOnMarkerPress={false}
+        showsPointsOfInterest={false}
+        customMapStyle={mapStyle}
+      >
+        {
+        futbolines !== undefined &&
+        futbolines?.map((futbolin, index) => {
+          return (
+            <CustomMarker
+              key={index}
+              futbolin={futbolin}
+              onpress={(futbolin) => { handleClickEnMarcador(futbolin) }}
+              selected={futbolinSeleccionado?.id === futbolin.id}
+            />
+          )
+        })}
+      </MapView>
     </>
   );
 }
+
+export { Mapa }

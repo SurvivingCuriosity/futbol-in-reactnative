@@ -24,7 +24,7 @@ const CustomMarker = ({futbolin, onpress, selected}) => {
                 anchor={{ x: 0.69, y: 1 }}
               >
 
-                <View className={`w-6 h-6 rounded-full bg-green-500 ${selected ? 'bg-green-500' : 'bg-green-300'}`}>
+                <View className={`w-6 h-6 rounded-full bg-green-500 ${selected ? 'bg-green-500' : 'bg-green-300'} ${selected ? 'border-2 border-neutral-400' : ''}`}>
                   {/* <Text>{futbolin.tipoDeFutbolin.nombre || 'Sin nombre'}</Text> */}
                 </View>
 
