@@ -1,7 +1,16 @@
-import { Text, View } from "react-native";
-import { useSelector } from "react-redux";
+import { Text, View, Pressable } from "react-native";
+import { useDispatch, useSelector } from "react-redux";
+import { logout } from "../../src/redux/slices/authSlice";
+import { useRouter } from "expo-router";
 export default function User() {
   const user = useSelector((state) => state.user);
+  const router = useRouter()
+  const dispatch = useDispatch()
+
+  const handleClickLogout = () => {
+    dispatch({type:'auth/logout'})
+    router.replace('/login')
+  }
 
   return (
     <View className={"m-2"}>
@@ -43,6 +52,10 @@ export default function User() {
             <Text className="text-miverde-400 text-lg">3</Text>
           </View>
         </View>
+
+        <Pressable onPress={()=>{handleClickLogout()}} className={"px-4 py-2 bg-neutral-600 rounded-md m-2"}>
+          <Text className={"text-white text-xl"}>Login</Text>
+        </Pressable>
       </View>
     </View>
   );

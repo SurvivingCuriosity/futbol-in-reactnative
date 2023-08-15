@@ -8,9 +8,20 @@ import {
   Image,
   Pressable
 } from "react-native";
-import { Link } from "expo-router";
+import { Link, useRouter } from "expo-router";
+import { login } from "../../src/redux/slices/authSlice";
+import { useDispatch } from "react-redux";
 
 export default function Login() {
+  const dispatch = useDispatch()
+  const router = useRouter()
+
+  const handleClickLogin = () => {
+    dispatch({type:'auth/login'})
+    router?.replace('/')
+  }
+
+
   return (
     <SafeAreaView
       style={{
@@ -50,11 +61,11 @@ export default function Login() {
           <Text className={"underline"}>aquí</Text>
       </Link>
       }</Text>
-      <Link href="/" asChild>
-        <Pressable className={"px-4 py-2 w-[200px] mx-auto bg-miverde-400 rounded-md mt-10"}>
+      {/* <Link href="/" asChild> */}
+        <Pressable onPress={()=>{handleClickLogin()}} className={"px-4 py-2 w-[200px] mx-auto bg-miverde-400 rounded-md mt-10"}>
           <Text className={"text-neutral-800 text-center text-2xl"}>Acceder</Text>
         </Pressable>
-      </Link>
+      {/* </Link> */}
 
       <Image 
         className="absolute bottom-0 -left-2 w-screen h-[300px]"
